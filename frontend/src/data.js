@@ -10,6 +10,7 @@ const data = {
             rating: 4.5,
             numReviews: 10,
             description: "high quality shirt",
+            countInStock: 4,
         },
         {
             _id: '2',
@@ -21,6 +22,7 @@ const data = {
             rating: 4.5,
             numReviews: 10,
             description: "high quality shirt",
+            countInStock: 6,
         },
         {
             _id: '3',
@@ -32,6 +34,7 @@ const data = {
             rating: 5,
             numReviews: 100,
             description: "high quality shirt",
+            countInStock: 0,
         },
         {
             _id: '4',
@@ -43,6 +46,7 @@ const data = {
             rating: 1.5,
             numReviews: 1,
             description: "high quality pants",
+            countInStock: 56,
         },
         {
             _id: '5',
@@ -54,6 +58,7 @@ const data = {
             rating: 2,
             numReviews: 14,
             description: "high quality pants",
+            countInStock: 0,
         },
         {
             _id: '6',
@@ -65,6 +70,7 @@ const data = {
             rating: 3.5,
             numReviews: 20,
             description: "high quality pants",
+            countInStock: 47,
         }
 
     ]
