@@ -1,0 +1,25 @@
+{
+  "name": "sketchy_shredders",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "proxy": "127.0.0.1:5000",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jeansenecal/sketchy-shredders-shop.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jeansenecal/sketchy-shredders-shop/issues"
+  },
+  "homepage": "https://github.com/jeansenecal/sketchy-shredders-shop#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1"
+  }
+}
