@@ -19,8 +19,11 @@
   },
   "homepage": "https://github.com/jeansenecal/sketchy-shredders-shop#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "express-async-handler": "^1.1.4",
+    "mongoose": "^5.11.7"
   },
   "devDependencies": {
     "eslint": "^7.15.0",
