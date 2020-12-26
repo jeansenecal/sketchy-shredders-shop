@@ -23,6 +23,17 @@ orderRouter.post('/', isAuth, expressAsyncHandler(async(req, res) => {
         res.status(201).send({message: "New Order Created", order: createdOrder});
     }
 }));
+
+orderRouter.get('/mine', isAuth, expressAsyncHandler(async(req, res) => {
+    //Returns the orders of the user whom is currently signed in
+    const orders = await Order.find({user: req.user._id});
+    if(orders){
+        res.send(orders);
+    } else {
+        res.status(404).send({message: "Orders not found"});
+    }
+}));
+
 //API to get details for an order
 orderRouter.get('/:id', isAuth, expressAsyncHandler(async(req, res) => {
     const order = await Order.findById(req.params.id);
@@ -50,4 +61,6 @@ orderRouter.put('/:id/pay', isAuth, expressAsyncHandler(async(req, res) => {
         res.status(404).send({message: "Order not found"});
     }
 }));
+
+
 export default orderRouter;
