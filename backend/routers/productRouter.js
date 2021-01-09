@@ -2,11 +2,13 @@ import express from 'express';
 import data from '../data.js';
 import Product from '../models/productModel.js';
 import expressAsyncHandler from 'express-async-handler';
-import { isAuth, isAdmin } from '../utils.js';
+import { isAuth, isAdmin, isSellerOrAdmin } from '../utils.js';
 const productRouter = express.Router();
 
 productRouter.get('/', expressAsyncHandler(async (req, res) => {
-    const products = await Product.find({});
+    const seller = req.query.seller || '';
+    const sellerFilter = seller ? { seller } : {};
+    const products = await Product.find({ ...sellerFilter }).populate('seller','seller.name seller.logo');
     res.send(products);
 }));
 
@@ -18,7 +20,7 @@ productRouter.get('/seed', expressAsyncHandler( async(req, res) => {
 }));
 
 productRouter.get('/:id', expressAsyncHandler(async (req, res) => {
-    const product = await Product.findById(req.params.id);
+    const product = await Product.findById(req.params.id).populate('seller','seller.name seller.logo seller.rating seller.numReviews');;
     if(product){
         res.send(product);
     } else {
@@ -26,7 +28,7 @@ productRouter.get('/:id', expressAsyncHandler(async (req, res) => {
     }
 }));
 
-productRouter.post('/', isAuth, isAdmin, expressAsyncHandler(async (req, res) => {
+productRouter.post('/', isAuth, isSellerOrAdmin, expressAsyncHandler(async (req, res) => {
     const product = new Product({
         name: 'samle name ' + Date.now(),
         image: '/images/p1.jpg',
@@ -37,12 +39,13 @@ productRouter.post('/', isAuth, isAdmin, expressAsyncHandler(async (req, res) =>
         rating: 0,
         numReviews: 0,
         description: 'sample description',
+        seller: req.user._id,
     });
     const createdProduct = await product.save();
     res.send({message: "Product created", product: createdProduct});
 }));
 
-productRouter.put('/:id', isAuth, isAdmin, expressAsyncHandler(async (req, res) => {
+productRouter.put('/:id', isAuth, isSellerOrAdmin, expressAsyncHandler(async (req, res) => {
     const productId = req.params.id;
     const product = await Product.findById(req.params.id);
     

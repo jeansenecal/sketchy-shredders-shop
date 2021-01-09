@@ -7,6 +7,8 @@ import { PRODUCT_CREATE_RESET, PRODUCT_DELETE_RESET } from '../constants/product
 
 
 export default function ProductListScreen(props) {
+
+    const sellerMode = props.match.path.indexOf("/seller") >= 0;
     
     const productList = useSelector(state => state.productList)
     const {loading, error, products} = productList;
@@ -18,7 +20,8 @@ export default function ProductListScreen(props) {
         success: successCreate,
         product: createdProduct,
     } = productCreate;
-
+    const userSignin = useSelector((state) => state.userSignin);
+    const { userInfo } = userSignin;
     const productDelete = useSelector(state => state.productDelete)
     const {loading: loadingDelete,error: errorDelete,success: successDelete,} = productDelete;
     
@@ -40,8 +43,8 @@ export default function ProductListScreen(props) {
         if(successDelete){
             dispatch({type:PRODUCT_DELETE_RESET});
         }
-        dispatch(listProducts());
-    }, [dispatch, createdProduct, props.history, successCreate, successDelete]);
+        dispatch(listProducts({seller: sellerMode ? userInfo._id : ""}));
+    }, [dispatch, createdProduct, props.history, successCreate, successDelete, userInfo._id, sellerMode]);
 
     return (
         <div>
