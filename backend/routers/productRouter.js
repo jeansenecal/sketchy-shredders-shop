@@ -83,8 +83,8 @@ productRouter.put('/:id', isAuth, isSellerOrAdmin, expressAsyncHandler(async (re
         product.description = req.body.description;
     
 
-    const updatedProduct = await product.save();
-    res.send({message: "Product updated", product: updatedProduct});
+        const updatedProduct = await product.save();
+        res.send({message: "Product updated", product: updatedProduct});
     } else {
         res.status(404).send({message: "Product not found."});
     }
@@ -96,6 +96,34 @@ productRouter.delete('/:id', isAuth, isAdmin, expressAsyncHandler(async (req, re
     if(product){
     const deletedProduct = await product.remove();
     res.send({message: "Product deleted", product: deletedProduct});
+    } else {
+        res.status(404).send({message: "Product not found."});
+    }
+}));
+
+productRouter.post('/:id/reviews', isAuth, expressAsyncHandler(async (req, res) => {
+    const productId = req.params.id;
+    const product = await Product.findById(req.params.id);
+    
+    if(product){
+        //Check to see if someone with the same name already submitted a review
+        if(product.reviews.find((x) => x.name === req.user.name)){
+            return res.status(400).send({ message: 'You already submitted a review' });
+        }
+        const review = {
+            name: req.user.name,
+            rating: Number(req.body.rating),
+            comment: req.body.comment
+        }
+        product.reviews.push(review);
+        product.numReviews = product.reviews.length;
+        product.rating = product.reviews.reduce((a,c) => c.rating + a, 0) / product.numReviews;
+
+        const updatedProduct = await product.save();
+        res.status(201).send({
+            message: "Review added", 
+            review: updatedProduct.reviews[product.numReviews - 1]
+        });
     } else {
         res.status(404).send({message: "Product not found."});
     }
