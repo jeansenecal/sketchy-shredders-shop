@@ -75,12 +75,10 @@ export const detailsUser = (userId) => async(dispatch, getState) => {
     });
 
     try {
-        const {
-            userSignin: { userInfo },
-          } = getState();
+        const {userSignin: { userInfo },} = getState();
         const {data} = await Axios.get("http://localhost:5000/api/users/"+userId, {
             headers: {
-                Authorization: "Bearer " + userInfo.token,
+                Authorization: "Bearer " + userInfo?.token,
               },
         });
         dispatch({

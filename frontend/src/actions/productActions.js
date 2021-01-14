@@ -1,12 +1,21 @@
 import Axios from "axios";
 import { PRODUCT_CATEGORY_LIST_FAIL, PRODUCT_CATEGORY_LIST_REQUEST, PRODUCT_CATEGORY_LIST_SUCCESS, PRODUCT_CREATE_FAIL, PRODUCT_CREATE_REQUEST, PRODUCT_CREATE_SUCCESS, PRODUCT_DELETE_FAIL, PRODUCT_DELETE_REQUEST, PRODUCT_DELETE_SUCCESS, PRODUCT_DETAILS_FAIL, PRODUCT_DETAILS_REQUEST, PRODUCT_DETAILS_SUCCESS, PRODUCT_LIST_FAIL, PRODUCT_LIST_REQUEST, PRODUCT_LIST_SUCCESS, PRODUCT_REVIEW_CREATE_FAIL, PRODUCT_REVIEW_CREATE_REQUEST, PRODUCT_REVIEW_CREATE_SUCCESS, PRODUCT_UPDATE_FAIL, PRODUCT_UPDATE_REQUEST, PRODUCT_UPDATE_SUCCESS } from "../constants/productConstant"
 
-export const listProducts = ({seller = '', name = '', category = '', order = '', min = 0, max = 0, rating = 0, }) => async (dispatch) => {
+export const listProducts = ({
+    seller = '', 
+    name = '', 
+    category = '', 
+    order = '', 
+    min = 0, 
+    max = 0, 
+    rating = 0,
+    pageNumber = '' 
+}) => async (dispatch) => {
     dispatch({
         type: PRODUCT_LIST_REQUEST
     });
     try{
-        const {data} = await Axios.get('http://localhost:5000/api/products?seller=' + seller + "&name=" + name + "&category=" + category + "&min=" + min + "&max=" + max + "&rating=" + rating + "&order=" + order); 
+        const {data} = await Axios.get('http://localhost:5000/api/products?seller=' + seller + "&name=" + name + "&category=" + category + "&min=" + min + "&max=" + max + "&rating=" + rating + "&order=" + order + "&pageNumber=" + pageNumber); 
         dispatch({type: PRODUCT_LIST_SUCCESS, payload: data});
     } catch (error){
         dispatch({type: PRODUCT_LIST_FAIL, payload : error.message});
