@@ -11,7 +11,7 @@ Here are some of the features:
 - Seller view where you can view manage your products
 
 Here is a list of the technologies I am using in this project:
-- MongoDB, mongoose, Express.js, React, Node.js, Redux, JSON Web Token, and Paypal API 
+- MongoDB, mongoose, Express.js, React, Node.js, Redux, JSON Web Token, Axios, Multer, Bcrypt.js and Paypal API 
 
 # Here is an example of the UI
 ![alt text](https://github.com/jeansenecal/sketchy-shredders-shop/blob/main/img1.PNG)
