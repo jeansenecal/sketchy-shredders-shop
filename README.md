@@ -1,4 +1,4 @@
-# sketchy-shredders-shop
+# Sketchy Shredders E-Commerce
 This project is an e-commerce that uses the MERN stack
 
 Here are some of the features:
@@ -13,4 +13,8 @@ Here are some of the features:
 Here is a list of the technologies I am using in this project:
 - MongoDB, mongoose, Express.js, React, Node.js, Redux, JSON Web Token, and Paypal API 
 
-Here are some screenshots of the project:
+# Here is an example of the UI
+![alt text](https://github.com/jeansenecal/sketchy-shredders-shop/blob/main/img1.PNG)
+![alt text](https://github.com/jeansenecal/sketchy-shredders-shop/blob/main/img2.PNG)
+![alt text](https://github.com/jeansenecal/sketchy-shredders-shop/blob/main/img3.PNG)
+![alt text](https://github.com/jeansenecal/sketchy-shredders-shop/blob/main/img4.PNG)
